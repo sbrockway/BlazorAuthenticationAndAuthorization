@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BethanysPieShopHRM.Server.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BethanysPieShopHRM.Server
 {
@@ -24,8 +25,10 @@ namespace BethanysPieShopHRM.Server
         {
             services.AddRazorPages();
             services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; });
-            
-        
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+
             services.AddHttpClient<IEmployeeDataService, EmployeeDataService>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:44340/");
@@ -58,6 +61,9 @@ namespace BethanysPieShopHRM.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
