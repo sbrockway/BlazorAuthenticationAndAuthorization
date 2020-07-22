@@ -1,20 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using BethanysPieShopHRM.Shared;
+using Microsoft.AspNetCore.Http;
 
 namespace BethanysPieShopHRM.Server.Services
 {
     public class EmployeeDataService : IEmployeeDataService
     {
         private readonly HttpClient _httpClient;
+		private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public EmployeeDataService(HttpClient httpClient)
+		public EmployeeDataService(HttpClient httpClient, IHttpContextAccessor httpContextAccessor)
         {
-            _httpClient = httpClient;
-        }
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+			_httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+		}
 
         public async Task<IEnumerable<Employee>> GetAllEmployees()
         {

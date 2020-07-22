@@ -6,12 +6,16 @@ using BethanysPieShopHRM.Server.Components;
 using BethanysPieShopHRM.Server.Services;
 using BethanysPieShopHRM.Shared;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace BethanysPieShopHRM.Server.Pages
 {
     public class EmployeeOverviewBase: ComponentBase
     {
-        [Inject]
+        [CascadingParameter]
+		public Task<AuthenticationState> authenticationStateTask { get; set; }
+
+		[Inject]
         public IEmployeeDataService EmployeeDataService { get; set; }
 
         public List<Employee> Employees { get; set; }
@@ -29,9 +33,13 @@ namespace BethanysPieShopHRM.Server.Pages
             StateHasChanged();
         }
 
-        protected void QuickAddEmployee()
+        protected async Task QuickAddEmployeeAsync()
         {
-            AddEmployeeDialog.Show();
+            var authenticationState = await authenticationStateTask;
+			if (authenticationState.User.Identity.Name == "Kevin")
+			{
+				AddEmployeeDialog.Show();
+			}
         }
     }
 }

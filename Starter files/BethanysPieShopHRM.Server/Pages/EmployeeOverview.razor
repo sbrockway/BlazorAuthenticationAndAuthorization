@@ -1,5 +1,6 @@
 ﻿@page "/employeeoverview"
 @inherits EmployeeOverviewBase
+@attribute [Authorize]
 
 <h1 class="page-title">All employees</h1>
 
@@ -41,6 +42,6 @@ else
     </table>
 }
 
-<button @onclick="@QuickAddEmployee" class="btn btn-dark table-btn quick-add-btn">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
+<button @onclick="@QuickAddEmployeeAsync" class="btn btn-dark table-btn quick-add-btn">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
 
 <AddEmployeeDialog @ref="AddEmployeeDialog" CloseEventCallback="@AddEmployeeDialog_OnDialogClose"></AddEmployeeDialog>
