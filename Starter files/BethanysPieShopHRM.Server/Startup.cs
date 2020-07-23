@@ -29,7 +29,7 @@ namespace BethanysPieShopHRM.Server
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            services.AddAuthentication("Identity.Application")
                 .AddCookie();
 
             services.AddHttpClient<IEmployeeDataService, EmployeeDataService>(client =>

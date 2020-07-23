@@ -26,15 +26,22 @@
 						 href="/employeeedit">
 					<span class="oi oi-list-rich" aria-hidden="true"></span> Add new employee
 				</NavLink>
+				@*<form method="post"
+					  action="Identity/Account/Logout">
+					<button class="list-group-item list-group-item-action bg-light">
+						<span class="oi oi-list-rich" aria-hidden="true"></span> Log out
+						(@context.User.Identity.Name)
+					</button>
+				</form>*@
 				<NavLink class="list-group-item list-group-item-action bg-light"
-						 href="Logout">
+						 href="/Identity/Account/Logout">
 					<span class="oi oi-list-rich" aria-hidden="true"></span> Log out 
 					(@context.User.Identity.Name)
 				</NavLink>
 			</Authorized>
 			<NotAuthorized>
 				<NavLink class="list-group-item list-group-item-action bg-light"
-						 href="Login">
+						 href="/Identity/Account/Login">
 					<span class="oi oi-list-rich" aria-hidden="true"></span> Log in
 				</NavLink>
 			</NotAuthorized>
