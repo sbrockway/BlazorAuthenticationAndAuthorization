@@ -20,9 +20,9 @@ namespace BethanysPieShopHRM.Server.Pages
 
         public List<Employee> Employees { get; set; }
 
-        protected AddEmployeeDialog AddEmployeeDialog { get; set; }
+		protected AddEmployeeDialog AddEmployeeDialog { get; set; }
 
-        protected override async Task OnInitializedAsync()
+		protected override async Task OnInitializedAsync()
         {
             Employees = (await EmployeeDataService.GetAllEmployees()).ToList();
         }
